@@ -1,0 +1,108 @@
+# Unified configuration file for the FrozenLlavaSAM + Wikipedia RAG wrapper.
+# Copy this file to `config/unified.yaml` and adjust the paths to match your setup.
+
+flmm:
+  # Path to the FrozenLlavaSAM mmengine config file bundled with this project.
+  # Choose the config that matches the checkpoint you intend to use.
+  config_path: rag_flmm/configs/llava/frozen_llava_1_5_vicuna_7b_unet_sam_l_refcoco_png.py
+  # Optional checkpoint containing fine-tuned weights.  Set to null to use the
+  # weights referenced inside the mmengine config.
+  checkpoint_path: null  # e.g. rag_flmm/work_dirs/iter_xxxxx.pth
+  # Device on which to run the FrozenLlavaSAM model ("cuda", "cuda:0", "cpu", etc.).
+  device: cuda
+  # Router threshold override.  When null, the model's internal threshold is used.
+  rag_threshold: null
+  # Optional kwargs forwarded to `RoutableFLMMPipeline.route` (e.g. batch sizes).
+  router_kwargs: {}
+
+wikipedia:
+  # Root directory of the vendored wikipedia project.
+  root: wikipedia
+  # Path to the wikipedia RAG YAML configuration (relative to the root above).
+  config_path: config.yaml
+  # Toggle graph-based NLI clustering and the downstream VLM answer generator.
+  enable_nli: true
+  enable_vlm: true
+  # Optional overrides applied after loading the wikipedia config. Pre-filled
+  # from the bundled wikipedia/config.yaml so this example works out-of-the-box
+  # (update paths if your dataset lives elsewhere).
+  overrides:
+    # Core KB/data paths
+    base_path: /dataset/evqa
+    image_path: /dataset/Downside_Abbey.jpg
+    kb_json_name: encyclopedic_kb_wiki.json
+    # Retrieval/search
+    k_value: 20
+    m_value: 10
+    alpha: 0.9
+    search_expand: 20
+    image_device: 1
+    image_encoder_name: BAAI/EVA-CLIP-8B
+    # Device placement
+    bge_device: 2
+    nli_device: 2
+    nli_batch_size: 512
+    vlm_device: 3
+    # Dataset metadata
+    dataset_csv: /dataset/evqa/test.csv
+    id2name_paths:
+      - /dataset/inaturalist/train_id2name.json
+      - /dataset/inaturalist/val_id2name.json
+      - /dataset/inaturalist/test_id2name.json
+      - /dataset/inaturalist/public_test_id2name.json
+    dataset_image_root: /dataset/inaturalist
+    dataset_google_root: /dataset/landmarks
+    clip_cache_dir: /dataset/cache
+    dataset_start: 0
+    dataset_end: 5750
+    # Text encoder / segmentation
+    text_encoder_model: facebook/contriever
+    segment_level: sentence_block
+    chunk_size: 1024
+    sentence_block_size: 5
+    sentence_block_max_tokens: 512
+    # Rerankers
+    bge_model: BAAI/bge-reranker-large
+    bge_max_length: 1024
+    bge_conf_threshold: 0.3
+    electra_model: cross-encoder/ms-marco-electra-base
+    mpnet_model: sentence-transformers/all-mpnet-base-v2
+    # Fusion weights
+    rank_img_ratio: 0.5
+    qformer_img_ratio: 0.5
+    # NLI options
+    deberta_nli_model: tasksource/deberta-base-long-nli
+    roberta_nli_model: FacebookAI/roberta-large-mnli
+    deberta_v3_nli_model: microsoft/deberta-large-mnli
+    nli_max_length: 512
+    nli_max_cluster: 3
+    nli_tau: 0.10
+    nli_alpha: 1.0
+    nli_beta: 1.0
+    nli_hybrid_lambda: 1
+    nli_reduction_mode: recompute
+    nli_reduction_epsilon: 1e-6
+    nli_edge_rule: avg
+    nli_dir_margin: 0.0
+    nli_models:
+      deberta: false
+      roberta: true
+      deberta_v3: false
+    rerankers:
+      contriever: false
+      jina_tiny: false
+      jina_turbo: false
+      bge: false
+      electra: false
+      mpnet: false
+      q-former: true
+
+runtime:
+  # Generate a final answer with the wikipedia VLM (requires enable_vlm=true).
+  generate_answer: true
+  # Max new tokens passed to the VLM generator.
+  max_new_tokens: 64
+  # When true, print a formatted summary in addition to the JSON payload.
+  pretty_print: true
+  # Optional path to dump the JSON summary.  Null -> only stdout.
+  json_output: null  # e.g. outputs/last_run.json

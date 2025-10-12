@@ -1,0 +1,13 @@
+torch
+transformers
+mmengine
+xtuner
+sentence-transformers
+tqdm
+Pillow
+numpy
+pyyaml
+
+[development]
+black
+ruff

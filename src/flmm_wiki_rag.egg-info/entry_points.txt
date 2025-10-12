@@ -1,0 +1,2 @@
+[console_scripts]
+flmm-wiki-rag = flmm_wiki_rag.cli:main

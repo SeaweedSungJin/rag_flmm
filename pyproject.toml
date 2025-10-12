@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flmm-wiki-rag"
+version = "0.1.0"
+description = "Unified pipeline that combines FrozenLlavaSAM routing with the Wikipedia RAG search stack."
+authors = [
+    {name = "sjkim"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "torch",
+    "transformers",
+    "mmengine",
+    "xtuner",
+    "sentence-transformers",
+    "tqdm",
+    "Pillow",
+    "numpy",
+    "pyyaml",
+]
+
+[project.optional-dependencies]
+development = [
+    "black",
+    "ruff",
+]
+
+[project.scripts]
+flmm-wiki-rag = "flmm_wiki_rag.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
