@@ -22,3 +22,9 @@ runtime:
   max_new_tokens: 64
   pretty_print: true
   json_output: null
+
+# Optional auth section. You may temporarily paste your HF token here during
+# development, then clear it before committing. Alternatively use
+# environment variable HF_TOKEN or config/local.yaml (gitignored).
+auth:
+  hf_token: 89e8a03deab2042611e52467cbc59a50f1ee716c

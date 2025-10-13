@@ -24,4 +24,6 @@ env/
 **/*_ids.pkl
 **/*.pt
 **/*.pth
+config/hf_token.secret
+config/local.yaml
 runs/
