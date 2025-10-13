@@ -1,0 +1,24 @@
+# Unified configuration for batch + single runs
+
+flmm:
+  # Vendored mmengine config for the router (path is relative to this YAML inside config/)
+  config_path: ../rag_flmm/configs/llava/frozen_llava_1_5_vicuna_7b_unet_sam_l_refcoco_png.py
+  checkpoint_path: null
+  device: cuda
+  rag_threshold: null
+  router_kwargs: {}
+
+wikipedia:
+  # Vendored wikipedia project root and its native YAML
+  root: ../wikipedia
+  config_path: config.yaml
+  enable_nli: true
+  enable_vlm: true
+  # You can override dataset/image/KB paths here if you don't want to edit wikipedia/config.yaml
+  overrides: {}
+
+runtime:
+  generate_answer: true
+  max_new_tokens: 64
+  pretty_print: true
+  json_output: null

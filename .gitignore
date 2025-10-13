@@ -1,2 +1,27 @@
 datasets/
 __pycache__/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.vscode/
+.idea/
+.DS_Store
+*.log
+logs/
+outputs/
+cache/
+tmp/
+*.ipynb_checkpoints/
+# Local virtualenvs
+.venv/
+venv/
+env/
+# Model/index artifacts (kept outside repo by default)
+**/*.faiss
+**/*_ids.pkl
+**/*.pt
+**/*.pth
+runs/

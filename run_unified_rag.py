@@ -22,7 +22,9 @@ def main(argv: list[str] | None = None) -> None:
     argv = list(sys.argv[1:] if argv is None else argv)
     # Detect whether a --config flag was provided or a default exists.
     has_flag = any(arg == "--config" or arg.startswith("--config=") for arg in argv)
-    default_cfg = ROOT / "config" / "unified.yaml"
+    default_cfg_primary = ROOT / "config" / "config.yaml"
+    default_cfg_fallback = ROOT / "config" / "unified.yaml"
+    default_cfg = default_cfg_primary if default_cfg_primary.exists() else default_cfg_fallback
     use_cli = has_flag or default_cfg.exists()
 
     if use_cli:

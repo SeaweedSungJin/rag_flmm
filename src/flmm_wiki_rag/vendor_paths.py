@@ -16,7 +16,9 @@ from pathlib import Path
 
 def ensure_vendor_paths() -> None:
     here = Path(__file__).resolve()
-    project_root = here.parent.parent  # .../flmm_wiki_rag
+    # This file lives at: <repo>/flmm_wiki_rag/src/flmm_wiki_rag/vendor_paths.py
+    # Project root is two levels up from 'src/flmm_wiki_rag': parents[2] == .../flmm_wiki_rag
+    project_root = here.parents[2]
     vendor_dirs = [project_root / "rag_flmm", project_root / "wikipedia"]
     for d in vendor_dirs:
         ds = str(d)
@@ -25,4 +27,3 @@ def ensure_vendor_paths() -> None:
 
 
 __all__ = ["ensure_vendor_paths"]
-

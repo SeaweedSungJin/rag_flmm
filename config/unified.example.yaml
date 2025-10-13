@@ -4,7 +4,7 @@
 flmm:
   # Path to the FrozenLlavaSAM mmengine config file bundled with this project.
   # Choose the config that matches the checkpoint you intend to use.
-  config_path: rag_flmm/configs/llava/frozen_llava_1_5_vicuna_7b_unet_sam_l_refcoco_png.py
+  config_path: ../rag_flmm/configs/llava/frozen_llava_1_5_vicuna_7b_unet_sam_l_refcoco_png.py
   # Optional checkpoint containing fine-tuned weights.  Set to null to use the
   # weights referenced inside the mmengine config.
   checkpoint_path: null  # e.g. rag_flmm/work_dirs/iter_xxxxx.pth
@@ -17,7 +17,7 @@ flmm:
 
 wikipedia:
   # Root directory of the vendored wikipedia project.
-  root: wikipedia
+  root: ../wikipedia
   # Path to the wikipedia RAG YAML configuration (relative to the root above).
   config_path: config.yaml
   # Toggle graph-based NLI clustering and the downstream VLM answer generator.
