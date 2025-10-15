@@ -12,7 +12,7 @@ flmm:
 
 wikipedia:
   # Vendored wikipedia project root and its native YAML
-  root: ../wikipedia
+  root: /home/sjkim/flmmwiki/flmm_wiki_rag/wikipedia
   config_path: config.yaml
   enable_nli: true
   enable_vlm: true
@@ -29,4 +29,4 @@ runtime:
 # development, then clear it before committing. Alternatively use
 # environment variable HF_TOKEN or config/local.yaml (gitignored).
 auth:
-  hf_token:  ##여기 토큰넣기
+  hf_token:##여기 토큰넣기
