@@ -7,6 +7,8 @@ flmm:
   device: cuda
   rag_threshold: null
   router_kwargs: {}
+  # Trained router checkpoint (directory with last_checkpoint or a .pth file)
+  router_checkpoint: /dataset/router/routernetv3/iter_70000.pth
 
 wikipedia:
   # Vendored wikipedia project root and its native YAML
@@ -27,8 +29,4 @@ runtime:
 # development, then clear it before committing. Alternatively use
 # environment variable HF_TOKEN or config/local.yaml (gitignored).
 auth:
-<<<<<<< HEAD
-  hf_token: 89e8a03deab2042611e52467cbc59a50f1ee716c
-=======
   hf_token:  ##여기 토큰넣기
->>>>>>> d6676e7 (평가1)
